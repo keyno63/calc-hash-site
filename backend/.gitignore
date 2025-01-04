@@ -1,0 +1,9 @@
+## project
+target
+
+## IDEA
+.idea
+backend.iml
+
+## scala
+.bsp
