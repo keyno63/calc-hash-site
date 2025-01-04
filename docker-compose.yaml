@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  frontend:
+    image: nginx:1.27
+    ports:
+      - "80:80"
+    volumes:
+      - ./etc/nginx/dev/conf.d:/etc/nginx/conf.d
+      - ./frontend/public:/var/www/public
+    depends_on:
+      - backend
+  backend:
+    build:
+      context: ./backend
+    volumes:
+      - ./backend:/backend
