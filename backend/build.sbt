@@ -9,10 +9,10 @@ lazy val root = (project in file("."))
     assembly / mainClass := Some("tokyo.name.maigo.calchash.backend.GreetingServer"),
     libraryDependencies ++= Seq(
       // zio/http
-      "dev.zio" %% "zio-http" % "3.0.0",
+      "dev.zio" %% "zio-http" % "3.0.1",
 
       // hash
-      "commons-codec" % "commons-codec" % "1.15"
+      "commons-codec" % "commons-codec" % "1.17.1"
     )
 )
 
