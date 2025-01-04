@@ -7,6 +7,7 @@ ThisBuild / name := "calc-hash-site-backend"
 lazy val root = (project in file("."))
   .settings(
     assembly / mainClass := Some("tokyo.name.maigo.calchash.backend.GreetingServer"),
+    assembly / assemblyJarName := "calc-hash-site-backend.jar",
     libraryDependencies ++= Seq(
       // zio/http
       "dev.zio" %% "zio-http" % "3.0.1",
