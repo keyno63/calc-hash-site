@@ -4,6 +4,8 @@ import tokyo.name.maigo.calchash.backend.app.controller.HashController
 import tokyo.name.maigo.calchash.backend.service.{Murmur3HashService, RandomStringService}
 import zio.*
 import zio.http.*
+import zio.http.Header.{Origin, AccessControlAllowOrigin}
+import zio.http.Middleware.{CorsConfig, cors}
 
 object AppServer extends ZIOAppDefault {
   // setup
@@ -13,6 +15,16 @@ object AppServer extends ZIOAppDefault {
     hashService,
     idService
   )
+
+  // middleware settings
+  val config: CorsConfig =
+    CorsConfig(
+      allowedOrigin = {
+        case origin if origin == Origin.parse("http://localhost:3000").toOption.get =>
+          Some(AccessControlAllowOrigin.Specific(origin))
+        case _ => None
+      },
+    )
 
   // route
   val routes =
@@ -27,7 +39,7 @@ object AppServer extends ZIOAppDefault {
         val (id, hash) = hashController.createAndGetHash()
         Response.json(s"""{"id": "$id", "value": "$hash"}""")
       }
-  )
+  ) @@ cors(config)
 
   def run = Server.serve(routes).provide(Server.default)
 }
