@@ -6,6 +6,7 @@ ThisBuild / name := "calc-hash-site-backend"
 
 lazy val root = (project in file("."))
   .settings(
+    assembly / mainClass := Some("tokyo.name.maigo.calchash.backend.GreetingServer"),
     libraryDependencies ++= Seq(
       // zio/http
       "dev.zio" %% "zio-http" % "3.0.0",
@@ -14,3 +15,8 @@ lazy val root = (project in file("."))
       "commons-codec" % "commons-codec" % "1.15"
     )
 )
+
+assembly / assemblyMergeStrategy := {
+  case PathList("META-INF", _*) => MergeStrategy.discard
+  case _                        => MergeStrategy.first
+}
