@@ -5,7 +5,7 @@ import tokyo.name.maigo.calchash.backend.service.{Murmur3HashService, RandomStri
 import zio.*
 import zio.http.*
 
-object GreetingServer extends ZIOAppDefault {
+object AppServer extends ZIOAppDefault {
   // setup
   val hashService = Murmur3HashService()
   val idService = RandomStringService(10)
@@ -21,11 +21,11 @@ object GreetingServer extends ZIOAppDefault {
       Method.GET / "hash" -> handler{ (req: Request) =>
         val id = req.queryParamToOrElse("id", "")
         val hash = hashController.getHash(id)
-        Response.text(s"$hash")
+        Response.json(s"""{"id": "$id", "value":"$hash"}""")
       },
       Method.GET / "random" -> handler{ (req: Request) =>
         val (id, hash) = hashController.createAndGetHash()
-        Response.text(s"id: $id, hash: $hash")
+        Response.json(s"""{"id": "$id", "value": "$hash"}""")
       }
   )
 
