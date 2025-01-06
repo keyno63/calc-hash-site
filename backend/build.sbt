@@ -1,8 +1,10 @@
-ThisBuild / version := "0.1.0-SNAPSHOT"
-
-ThisBuild / scalaVersion := "3.6.0"
-
-ThisBuild / name := "calc-hash-site-backend"
+inThisBuild(
+    List(
+        version := "0.1.0-SNAPSHOT",
+        scalaVersion := "3.6.0",
+        name := "calc-hash-site-backend"
+    )
+)
 
 lazy val root = (project in file("."))
   .settings(
