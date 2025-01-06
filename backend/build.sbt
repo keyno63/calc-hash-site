@@ -11,9 +11,6 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(
       // zio/http
       "dev.zio" %% "zio-http" % "3.0.1",
-
-      // hash
-      "commons-codec" % "commons-codec" % "1.17.1"
     )
 )
 
