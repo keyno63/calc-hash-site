@@ -15,7 +15,7 @@ lazy val root = (project in file("."))
       "dev.zio" %% "zio-http" % "3.0.1",
 
       // test
-      "org.scalatest" %% "scalatest" % "3.0.8" % Test,
+      "org.scalatest" %% "scalatest" % "3.2.19" % Test,
     )
 )
 
