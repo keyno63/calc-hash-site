@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  frontend:
+  web:
     image: nginx:1.27
     ports:
       - "80:80"
@@ -10,8 +10,24 @@ services:
       - ./frontend/public:/var/www/public
     depends_on:
       - backend
+    networks:
+      - frontend    
+      - backend
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - frontend    
   backend:
     build:
       context: ./backend
     volumes:
       - ./backend:/backend
+    networks:
+      - backend
+  db:
+networks:
+  frontend:
+  backend:
