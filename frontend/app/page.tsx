@@ -12,7 +12,6 @@ export default function Home() {
           method: 'GET',
       });
 
-
       if (response.ok) {
         const data = await response.json();
         const id = (data.id) ? data.id : "blunk id";
@@ -35,24 +34,25 @@ export default function Home() {
   const handleSubmitHashId = async () => {
     handleSubmit(`http://localhost:8080/hash?id=${encodeURIComponent(inputText)}`)
   }
+
   const handleSubmitRandom = () => {
     handleSubmit(`http://localhost:8080/random`)
   }
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Send Text to Server</h1>
+    <div className="p-5">
+      <h1 className="text-2xl font-bold mb-4">Send Text to Server</h1>
       <input
         type="text"
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
         placeholder="Enter text here"
-        style={{ marginRight: '10px' }}
+        className="border border-gray-300 p-2 rounded mr-2"
       />
-      <button style={{ marginLeft: '5px' }} onClick={handleSubmitHashId}>Send</button>
-      <button style={{ marginLeft: '5px' }} onClick={handleSubmitRandom}>Random</button>
+      <button className="bg-blue-500 text-white p-2 rounded ml-2" onClick={handleSubmitHashId}>Send</button>
+      <button className="bg-green-500 text-white p-2 rounded ml-2" onClick={handleSubmitRandom}>Random</button>
       {responseMessage && (
-        <div style={{ marginTop: '20px' }}>
+        <div className="mt-4">
           <strong>Response:</strong> {responseMessage}
         </div>
       )}
